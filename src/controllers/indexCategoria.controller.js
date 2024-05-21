@@ -1,20 +1,20 @@
 import { pool } from "../db.js";
 
 export const getCategorias = async (req, res) => {
-    const response = await pool.query("SELECT * FROM Categoria ORDER BY id ASC");
+    const response = await pool.query("SELECT * FROM Categoria ORDER BY categoria_id ASC");
     res.status(200).json(response.rows);
 };
 
 export const getCategoriaById = async (req, res) => {
     const id = parseInt(req.params.id);
-    const response = await pool.query("SELECT * FROM Categoria WHERE id = $1", [id]);
+    const response = await pool.query("SELECT * FROM Categoria WHERE categoria_id = $1", [id]);
     res.json(response.rows);
 };
 
 export const createCategoria = async (req, res) => {
     try {
         const { nombre, descripcion } = req.body;
-
+ 
         const { rows } = await pool.query(
             "INSERT INTO Categoria (nombre, descripcion) VALUES ($1, $2) RETURNING *",
             [nombre, descripcion]

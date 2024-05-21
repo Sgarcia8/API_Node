@@ -1,13 +1,13 @@
 import { pool } from "../db.js";
 
 export const getProductos = async (req, res) => {
-    const response = await pool.query("SELECT * FROM Producto ORDER BY id ASC");
+    const response = await pool.query("SELECT * FROM Producto ORDER BY producto_id ASC");
     res.status(200).json(response.rows);
 };
 
 export const getProductoById = async (req, res) => {
     const id = parseInt(req.params.id);
-    const response = await pool.query("SELECT * FROM Producto WHERE id = $1", [id]);
+    const response = await pool.query("SELECT * FROM Producto WHERE producto_id = $1", [id]);
     res.json(response.rows);
 };
 
