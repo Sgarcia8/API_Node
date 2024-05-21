@@ -11,6 +11,12 @@ export const getProductoById = async (req, res) => {
     res.json(response.rows);
 };
 
+export const getProductoByCategoria = async (req, res) => {
+  const id = parseInt(req.params.id);
+  const response = await pool.query("SELECT * FROM Producto WHERE categoria_id = $1", [id]);
+  res.json(response.rows);
+};
+
 export const createProducto = async (req, res) => {
     try {
         const { nombre, descripcion, precio, imagen, categoria_id } = req.body;
